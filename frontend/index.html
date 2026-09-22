@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+            name="description"
+            content="SaaS Cost Guardian - Intelligent API usage and anomaly monitoring"
+    >
+
+    <title>SaaS Cost Guardian</title>
+
+    <link
+            rel="stylesheet"
+            href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     SIDEBAR
+     ========================================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            SC
+        </div>
+
+        <div>
+
+            <h2>
+                SaaS Cost
+            </h2>
+
+            <span>
+                    Guardian
+                </span>
+
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a
+                href="#"
+                class="nav-item active"
+        >
+            <span>📊</span>
+            Dashboard
+        </a>
+
+
+        <a
+                href="#"
+                class="nav-item"
+        >
+            <span>📈</span>
+            Usage Analysis
+        </a>
+
+
+        <a
+                href="#"
+                class="nav-item"
+        >
+            <span>🚨</span>
+            Anomalies
+        </a>
+
+
+        <a
+                href="#"
+                class="nav-item"
+        >
+            <span>⚙️</span>
+            Settings
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="system-status">
+
+            <span class="status-dot"></span>
+
+            System Online
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =========================================
+     MAIN CONTENT
+     ========================================= -->
+
+<main class="main-content">
+
+
+    <!-- =====================================
+         TOP BAR
+         ===================================== -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>
+                Cost Dashboard
+            </h1>
+
+            <p>
+                Monitor SaaS API usage and detect anomalies
+            </p>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="last-updated">
+
+                Last updated:
+
+                <strong id="lastUpdated">
+                    --
+                </strong>
+
+            </div>
+
+
+            <button
+                    id="refreshBtn"
+                    class="refresh-btn"
+            >
+                ↻ Refresh
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================
+         ANOMALY ALERT
+         ===================================== -->
+
+    <section
+            id="alertBox"
+            class="alert-box hidden"
+    >
+
+        <div class="alert-icon">
+            ⚠
+        </div>
+
+
+        <div class="alert-content">
+
+            <h3 id="alertTitle">
+                Anomaly Detected
+            </h3>
+
+            <p id="alertMessage">
+                Unusual API usage has been detected.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         STATISTICS
+         ===================================== -->
+
+    <section class="stats-grid">
+
+
+        <!-- Current API Calls -->
+
+        <div class="stat-card">
+
+            <div class="stat-header">
+
+                    <span>
+                        Current API Calls
+                    </span>
+
+                <span class="stat-icon">
+                        📡
+                    </span>
+
+            </div>
+
+
+            <h2 id="currentCost">
+                0
+            </h2>
+
+
+            <p class="stat-description">
+                Current API usage
+            </p>
+
+        </div>
+
+
+
+        <!-- Baseline -->
+
+        <div class="stat-card">
+
+            <div class="stat-header">
+
+                    <span>
+                        Baseline Calls
+                    </span>
+
+                <span class="stat-icon">
+                        📊
+                    </span>
+
+            </div>
+
+
+            <h2 id="projectedCost">
+                0
+            </h2>
+
+
+            <p class="stat-description">
+                Expected API usage baseline
+            </p>
+
+        </div>
+
+
+
+        <!-- Anomaly Score -->
+
+        <div class="stat-card">
+
+            <div class="stat-header">
+
+                    <span>
+                        Anomaly Score
+                    </span>
+
+                <span class="stat-icon">
+                        🚨
+                    </span>
+
+            </div>
+
+
+            <h2 id="anomalyScore">
+                0.00
+            </h2>
+
+
+            <p
+                    id="anomalyStatus"
+                    class="status-normal"
+            >
+                Normal
+            </p>
+
+        </div>
+
+
+
+        <!-- Risk Level -->
+
+        <div class="stat-card">
+
+            <div class="stat-header">
+
+                    <span>
+                        Risk Level
+                    </span>
+
+                <span class="stat-icon">
+                        🛡️
+                    </span>
+
+            </div>
+
+
+            <h2 id="riskLevel">
+                Low
+            </h2>
+
+
+            <p class="stat-description">
+                Current anomaly risk
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         DASHBOARD GRID
+         ===================================== -->
+
+    <section class="dashboard-grid">
+
+
+        <!-- =================================
+             USAGE CHART
+             ================================= -->
+
+        <div class="card chart-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        API Usage
+                    </h2>
+
+                    <p>
+                        Current usage compared with baseline
+                    </p>
+
+                </div>
+
+
+                <select id="timeRange">
+
+                    <option value="current">
+                        Current
+                    </option>
+
+                    <option value="7">
+                        Last 7 Days
+                    </option>
+
+                    <option value="30">
+                        Last 30 Days
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="chart-container">
+
+                <canvas id="costChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             DECISION ENGINE
+             ================================= -->
+
+        <div class="card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Decision Engine
+                    </h2>
+
+                    <p>
+                        Latest system decision
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="decision-container">
+
+
+                <div
+                        class="decision-status"
+                        id="decisionStatus"
+                >
+                    Monitoring
+                </div>
+
+
+
+                <div class="decision-item">
+
+                        <span>
+                            Recommendation
+                        </span>
+
+                    <strong id="recommendation">
+                        No action required
+                    </strong>
+
+                </div>
+
+
+
+                <div class="decision-item">
+
+                        <span>
+                            Anomaly Score
+                        </span>
+
+                    <strong id="confidence">
+                        0.00
+                    </strong>
+
+                </div>
+
+
+
+                <div class="decision-item">
+
+                        <span>
+                            Current Calls
+                        </span>
+
+                    <strong id="estimatedSavings">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         SERVICE / SYSTEM STATUS
+         ===================================== -->
+
+    <section class="card services-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    System Information
+                </h2>
+
+                <p>
+                    Current Decision Engine status
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                <tr>
+
+                    <th>
+                        Metric
+                    </th>
+
+                    <th>
+                        Value
+                    </th>
+
+                    <th>
+                        Description
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                </tr>
+
+                </thead>
+
+
+                <tbody id="servicesTable">
+
+                <tr>
+
+                    <td>
+                        Decision Engine
+                    </td>
+
+                    <td>
+                        <strong>
+                            Connected
+                        </strong>
+                    </td>
+
+                    <td>
+                        Waiting for backend data
+                    </td>
+
+                    <td>
+                        Monitoring
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         FOOTER
+         ===================================== -->
+
+    <footer>
+
+        <p>
+
+            SaaS Cost Guardian
+
+            <span>
+                    •
+                </span>
+
+            Intelligent SaaS Usage Monitoring
+
+        </p>
+
+    </footer>
+
+
+</main>
+
+
+
+<!-- =========================================
+     CHART.JS
+     ========================================= -->
+
+<script
+        src="https://cdn.jsdelivr.net/npm/chart.js"
+></script>
+
+
+
+<!-- =========================================
+     APPLICATION JAVASCRIPT
+     ========================================= -->
+
+<script
+        src="js/app.js"
+></script>
+
+
+</body>
+
+</html>
