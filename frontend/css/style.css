@@ -1,0 +1,477 @@
+/* =========================================================
+   SaaS Cost Guardian
+   Global Design System
+   ========================================================= */
+
+:root {
+    --bg-main: #0a0d12;
+    --bg-sidebar: #0d1117;
+    --bg-panel: #11161e;
+    --bg-panel-light: #151b24;
+
+    --border: #222a35;
+    --border-light: #2b3441;
+
+    --text-primary: #f2f5f8;
+    --text-secondary: #9aa5b3;
+    --text-muted: #626d7a;
+
+    --accent: #7c5cff;
+    --accent-light: #9a82ff;
+    --accent-soft: rgba(124, 92, 255, 0.12);
+
+    --success: #35d07f;
+    --success-soft: rgba(53, 208, 127, 0.12);
+
+    --warning: #ffb547;
+    --warning-soft: rgba(255, 181, 71, 0.12);
+
+    --danger: #ff5c6c;
+    --danger-soft: rgba(255, 92, 108, 0.12);
+
+    --radius-small: 8px;
+    --radius-medium: 14px;
+    --radius-large: 20px;
+
+    --sidebar-width: 235px;
+
+    --transition: 0.2s ease;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 80% 0%,
+            rgba(124, 92, 255, 0.07),
+            transparent 30%
+        ),
+        var(--bg-main);
+
+    color: var(--text-primary);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    overflow-x: hidden;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   APP SHELL
+   ========================================================= */
+
+.app-shell {
+    min-height: 100vh;
+    display: flex;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    width: var(--sidebar-width);
+    min-height: 100vh;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 26px 16px;
+
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+
+    z-index: 100;
+}
+
+
+/* Brand */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 0 10px;
+    margin-bottom: 42px;
+}
+
+.brand-mark {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: var(--accent);
+    color: white;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+
+    box-shadow:
+        0 0 25px rgba(124, 92, 255, 0.25);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+
+    line-height: 1.05;
+}
+
+.brand-text span {
+    color: var(--text-secondary);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.brand-text strong {
+    color: var(--text-primary);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+/* Navigation */
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.nav-section-title {
+    margin: 10px 10px 9px;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+}
+
+.nav-item {
+    min-height: 42px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 0 12px;
+
+    border-radius: 9px;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+    font-weight: 500;
+
+    transition:
+        background var(--transition),
+        color var(--transition);
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.035);
+    color: var(--text-primary);
+}
+
+.nav-item.active {
+    background: var(--accent-soft);
+    color: var(--text-primary);
+}
+
+.nav-icon {
+    width: 18px;
+
+    display: inline-flex;
+    justify-content: center;
+
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+.nav-item.active .nav-icon {
+    color: var(--accent-light);
+}
+
+
+/* Sidebar footer */
+
+.sidebar-footer {
+    margin-top: auto;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 13px 10px;
+
+    border-top: 1px solid var(--border);
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--success);
+
+    box-shadow:
+        0 0 0 4px rgba(53, 208, 127, 0.08),
+        0 0 12px rgba(53, 208, 127, 0.4);
+}
+
+.system-status div {
+    display: flex;
+    flex-direction: column;
+}
+
+.system-status strong {
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.system-status small {
+    margin-top: 2px;
+
+    color: var(--text-muted);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.main-content {
+    width: calc(100% - var(--sidebar-width));
+    min-height: 100vh;
+
+    margin-left: var(--sidebar-width);
+
+    padding: 34px 42px 24px;
+}
+
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.topbar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+}
+
+.eyebrow {
+    margin-bottom: 5px;
+
+    color: var(--accent-light);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.topbar h1 {
+    color: var(--text-primary);
+
+    font-size: 27px;
+    font-weight: 650;
+    letter-spacing: -0.7px;
+}
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+/* Live indicator */
+
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 8px 11px;
+
+    border: 1px solid var(--border);
+    border-radius: 20px;
+
+    color: var(--text-secondary);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.live-indicator span {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--success);
+
+    box-shadow: 0 0 8px rgba(53, 208, 127, 0.6);
+}
+
+
+/* Refresh button */
+
+.refresh-button {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 9px 13px;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background: var(--bg-panel);
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+
+    transition:
+        background var(--transition),
+        border-color var(--transition),
+        color var(--transition);
+}
+
+.refresh-button:hover {
+    background: var(--bg-panel-light);
+    border-color: var(--border-light);
+    color: var(--text-primary);
+}
+
+
+/* =========================================================
+   UTILITY
+   ========================================================= */
+
+.hidden {
+    display: none !important;
+}
+
+.section-block {
+    margin-bottom: 34px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+}
+
+.section-label {
+    margin-bottom: 4px;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.7px;
+}
+
+.section-heading h2,
+.panel-header h2 {
+    color: var(--text-primary);
+
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+}
+
+.last-updated {
+    color: var(--text-muted);
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 22px 2px 4px;
+
+    border-top: 1px solid var(--border);
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+}

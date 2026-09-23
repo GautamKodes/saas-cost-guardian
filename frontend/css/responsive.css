@@ -1,0 +1,598 @@
+/* =========================================================
+   DASHBOARD COMPONENTS
+   ========================================================= */
+
+
+/* =========================================================
+   ANOMALY ALERT
+   ========================================================= */
+
+.anomaly-alert {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    min-height: 70px;
+
+    margin-bottom: 30px;
+    padding: 13px 17px;
+
+    border: 1px solid rgba(255, 92, 108, 0.22);
+    border-radius: var(--radius-medium);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255, 92, 108, 0.08),
+            rgba(255, 92, 108, 0.025)
+        );
+}
+
+.alert-symbol {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: var(--danger-soft);
+    color: var(--danger);
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.alert-content {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+}
+
+.alert-content strong {
+    color: var(--text-primary);
+
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.alert-content span {
+    margin-top: 2px;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+}
+
+.alert-score {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    padding-left: 18px;
+
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.alert-score small {
+    color: var(--text-muted);
+
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.alert-score strong {
+    margin-top: 2px;
+
+    color: var(--danger);
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   METRIC GRID
+   ========================================================= */
+
+.metric-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+.metric-card {
+    position: relative;
+
+    min-height: 148px;
+
+    padding: 18px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-medium);
+
+    background: var(--bg-panel);
+
+    transition:
+        transform var(--transition),
+        border-color var(--transition),
+        background var(--transition);
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+
+    border-color: var(--border-light);
+
+    background: var(--bg-panel-light);
+}
+
+
+/* Accent glow */
+
+.metric-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    right: -45px;
+    bottom: -50px;
+
+    border-radius: 50%;
+
+    background: var(--accent-soft);
+
+    filter: blur(15px);
+
+    pointer-events: none;
+}
+
+.primary-card {
+    border-color: rgba(124, 92, 255, 0.24);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(124, 92, 255, 0.10),
+            var(--bg-panel) 60%
+        );
+}
+
+.metric-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.metric-symbol {
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+.metric-value {
+    margin-top: 20px;
+
+    color: var(--text-primary);
+
+    font-size: 29px;
+    font-weight: 650;
+    letter-spacing: -1px;
+}
+
+.primary-card .metric-value {
+    color: var(--accent-light);
+}
+
+.metric-description {
+    margin-top: 4px;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   RISK CARD
+   ========================================================= */
+
+.risk-indicator {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--text-muted);
+}
+
+.risk-value {
+    text-transform: uppercase;
+
+    font-size: 24px;
+    letter-spacing: -0.5px;
+}
+
+.risk-card.high .risk-value {
+    color: var(--danger);
+}
+
+.risk-card.medium .risk-value {
+    color: var(--warning);
+}
+
+.risk-card.low .risk-value {
+    color: var(--success);
+}
+
+.risk-card.high .risk-indicator {
+    background: var(--danger);
+
+    box-shadow: 0 0 10px rgba(255, 92, 108, 0.55);
+}
+
+.risk-card.medium .risk-indicator {
+    background: var(--warning);
+
+    box-shadow: 0 0 10px rgba(255, 181, 71, 0.55);
+}
+
+.risk-card.low .risk-indicator {
+    background: var(--success);
+
+    box-shadow: 0 0 10px rgba(53, 208, 127, 0.55);
+}
+
+
+/* =========================================================
+   ANALYTICS LAYOUT
+   ========================================================= */
+
+.analytics-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.55fr)
+        minmax(330px, 0.9fr);
+
+    gap: 12px;
+
+    margin-bottom: 34px;
+}
+
+
+/* =========================================================
+   PANELS
+   ========================================================= */
+
+.panel {
+    min-width: 0;
+
+    padding: 20px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-large);
+
+    background: var(--bg-panel);
+}
+
+.panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   CHART
+   ========================================================= */
+
+.chart-legend {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+}
+
+.chart-legend span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.chart-legend i {
+    width: 7px;
+    height: 7px;
+
+    display: inline-block;
+
+    border-radius: 50%;
+}
+
+.legend-current {
+    background: var(--accent);
+}
+
+.legend-baseline {
+    background: var(--text-muted);
+}
+
+.chart-container {
+    position: relative;
+
+    width: 100%;
+    height: 270px;
+}
+
+
+/* =========================================================
+   DECISION PANEL
+   ========================================================= */
+
+.decision-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.decision-badge {
+    padding: 5px 8px;
+
+    border: 1px solid var(--border);
+    border-radius: 6px;
+
+    color: var(--text-muted);
+
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.decision-badge.danger {
+    border-color: rgba(255, 92, 108, 0.25);
+
+    background: var(--danger-soft);
+    color: var(--danger);
+}
+
+.decision-badge.success {
+    border-color: rgba(53, 208, 127, 0.25);
+
+    background: var(--success-soft);
+    color: var(--success);
+}
+
+
+/* Decision status */
+
+.decision-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px;
+
+    margin-bottom: 17px;
+
+    border: 1px solid var(--border);
+    border-radius: 11px;
+
+    background: rgba(255, 255, 255, 0.015);
+}
+
+.decision-icon {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 9px;
+
+    background: var(--accent-soft);
+
+    color: var(--accent-light);
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.decision-status strong {
+    display: block;
+
+    color: var(--text-primary);
+
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.decision-status span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+}
+
+
+/* Decision data */
+
+.decision-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.decision-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 0;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+}
+
+.decision-row:last-child {
+    border-bottom: none;
+}
+
+.decision-row span {
+    color: var(--text-muted);
+
+    font-size: 10px;
+}
+
+.decision-row strong {
+    color: var(--text-primary);
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* Recommendation */
+
+.recommendation {
+    margin-top: auto;
+
+    padding: 13px;
+
+    border-radius: 10px;
+
+    background: var(--accent-soft);
+}
+
+.recommendation-label {
+    color: var(--accent-light);
+
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.recommendation p {
+    margin-top: 5px;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SYSTEM TABLE
+   ========================================================= */
+
+.system-table {
+    overflow: hidden;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-medium);
+
+    background: var(--bg-panel);
+}
+
+.system-row {
+    min-height: 51px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 17px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+}
+
+.system-row:last-child {
+    border-bottom: none;
+}
+
+.system-row > span {
+    color: var(--text-muted);
+
+    font-size: 10px;
+}
+
+.system-row > strong {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.system-row code {
+    padding: 5px 8px;
+
+    border-radius: 5px;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    color: var(--text-secondary);
+
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   STATE CLASSES
+   ========================================================= */
+
+.decision-panel.anomaly {
+    border-color: rgba(255, 92, 108, 0.2);
+}
+
+.decision-panel.anomaly .decision-icon {
+    background: var(--danger-soft);
+    color: var(--danger);
+}
+
+.decision-panel.normal {
+    border-color: rgba(53, 208, 127, 0.15);
+}
+
+.decision-panel.normal .decision-icon {
+    background: var(--success-soft);
+    color: var(--success);
+}
