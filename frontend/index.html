@@ -1,603 +1,412 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-            name="description"
-            content="SaaS Cost Guardian - Intelligent API usage and anomaly monitoring"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>SaaS Cost Guardian</title>
 
-    <link
-            rel="stylesheet"
-            href="css/style.css"
-    >
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
 
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 
 <body>
 
+<div class="app-shell">
 
-<!-- =========================================
-     SIDEBAR
-     ========================================= -->
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar">
 
-<aside class="sidebar">
-
-    <div class="logo">
-
-        <div class="logo-icon">
-            SC
-        </div>
-
-        <div>
-
-            <h2>
-                SaaS Cost
-            </h2>
-
-            <span>
-                    Guardian
-                </span>
-
-        </div>
-
-    </div>
-
-
-    <nav>
-
-        <a
-                href="#"
-                class="nav-item active"
-        >
-            <span>📊</span>
-            Dashboard
-        </a>
-
-
-        <a
-                href="#"
-                class="nav-item"
-        >
-            <span>📈</span>
-            Usage Analysis
-        </a>
-
-
-        <a
-                href="#"
-                class="nav-item"
-        >
-            <span>🚨</span>
-            Anomalies
-        </a>
-
-
-        <a
-                href="#"
-                class="nav-item"
-        >
-            <span>⚙️</span>
-            Settings
-        </a>
-
-    </nav>
-
-
-    <div class="sidebar-bottom">
-
-        <div class="system-status">
-
-            <span class="status-dot"></span>
-
-            System Online
-
-        </div>
-
-    </div>
-
-</aside>
-
-
-
-<!-- =========================================
-     MAIN CONTENT
-     ========================================= -->
-
-<main class="main-content">
-
-
-    <!-- =====================================
-         TOP BAR
-         ===================================== -->
-
-    <header class="topbar">
-
-        <div>
-
-            <h1>
-                Cost Dashboard
-            </h1>
-
-            <p>
-                Monitor SaaS API usage and detect anomalies
-            </p>
-
-        </div>
-
-
-        <div class="topbar-right">
-
-            <div class="last-updated">
-
-                Last updated:
-
-                <strong id="lastUpdated">
-                    --
-                </strong>
-
+        <div class="brand">
+            <div class="brand-mark">
+                SC
             </div>
 
-
-            <button
-                    id="refreshBtn"
-                    class="refresh-btn"
-            >
-                ↻ Refresh
-            </button>
-
+            <div class="brand-text">
+                <span>SaaS</span>
+                <strong>Guardian</strong>
+            </div>
         </div>
 
-    </header>
+        <nav class="navigation">
 
-
-
-    <!-- =====================================
-         ANOMALY ALERT
-         ===================================== -->
-
-    <section
-            id="alertBox"
-            class="alert-box hidden"
-    >
-
-        <div class="alert-icon">
-            ⚠
-        </div>
-
-
-        <div class="alert-content">
-
-            <h3 id="alertTitle">
-                Anomaly Detected
-            </h3>
-
-            <p id="alertMessage">
-                Unusual API usage has been detected.
-            </p>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================
-         STATISTICS
-         ===================================== -->
-
-    <section class="stats-grid">
-
-
-        <!-- Current API Calls -->
-
-        <div class="stat-card">
-
-            <div class="stat-header">
-
-                    <span>
-                        Current API Calls
-                    </span>
-
-                <span class="stat-icon">
-                        📡
-                    </span>
-
+            <div class="nav-section-title">
+                MONITOR
             </div>
 
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">◈</span>
+                <span>Overview</span>
+            </a>
 
-            <h2 id="currentCost">
-                0
-            </h2>
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⌁</span>
+                <span>Live Usage</span>
+            </a>
 
+            <a href="#" class="nav-item">
+                <span class="nav-icon">△</span>
+                <span>Anomalies</span>
+            </a>
 
-            <p class="stat-description">
-                Current API usage
-            </p>
-
-        </div>
-
-
-
-        <!-- Baseline -->
-
-        <div class="stat-card">
-
-            <div class="stat-header">
-
-                    <span>
-                        Baseline Calls
-                    </span>
-
-                <span class="stat-icon">
-                        📊
-                    </span>
-
+            <div class="nav-section-title">
+                INTELLIGENCE
             </div>
 
+            <a href="#" class="nav-item">
+                <span class="nav-icon">✦</span>
+                <span>Decisions</span>
+            </a>
 
-            <h2 id="projectedCost">
-                0
-            </h2>
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⚙</span>
+                <span>Settings</span>
+            </a>
 
+        </nav>
 
-            <p class="stat-description">
-                Expected API usage baseline
-            </p>
-
-        </div>
-
-
-
-        <!-- Anomaly Score -->
-
-        <div class="stat-card">
-
-            <div class="stat-header">
-
-                    <span>
-                        Anomaly Score
-                    </span>
-
-                <span class="stat-icon">
-                        🚨
-                    </span>
-
-            </div>
-
-
-            <h2 id="anomalyScore">
-                0.00
-            </h2>
-
-
-            <p
-                    id="anomalyStatus"
-                    class="status-normal"
-            >
-                Normal
-            </p>
-
-        </div>
-
-
-
-        <!-- Risk Level -->
-
-        <div class="stat-card">
-
-            <div class="stat-header">
-
-                    <span>
-                        Risk Level
-                    </span>
-
-                <span class="stat-icon">
-                        🛡️
-                    </span>
-
-            </div>
-
-
-            <h2 id="riskLevel">
-                Low
-            </h2>
-
-
-            <p class="stat-description">
-                Current anomaly risk
-            </p>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================
-         DASHBOARD GRID
-         ===================================== -->
-
-    <section class="dashboard-grid">
-
-
-        <!-- =================================
-             USAGE CHART
-             ================================= -->
-
-        <div class="card chart-card">
-
-
-            <div class="card-header">
+        <div class="sidebar-footer">
+            <div class="system-status">
+                <span class="status-dot"></span>
 
                 <div>
-
-                    <h2>
-                        API Usage
-                    </h2>
-
-                    <p>
-                        Current usage compared with baseline
-                    </p>
-
+                    <strong>System Online</strong>
+                    <small>Decision Engine connected</small>
                 </div>
-
-
-                <select id="timeRange">
-
-                    <option value="current">
-                        Current
-                    </option>
-
-                    <option value="7">
-                        Last 7 Days
-                    </option>
-
-                    <option value="30">
-                        Last 30 Days
-                    </option>
-
-                </select>
-
             </div>
-
-
-            <div class="chart-container">
-
-                <canvas id="costChart"></canvas>
-
-            </div>
-
         </div>
 
+    </aside>
 
 
-        <!-- =================================
-             DECISION ENGINE
-             ================================= -->
+    <!-- ================= MAIN CONTENT ================= -->
 
-        <div class="card">
+    <main class="main-content">
 
-
-            <div class="card-header">
-
-                <div>
-
-                    <h2>
-                        Decision Engine
-                    </h2>
-
-                    <p>
-                        Latest system decision
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="decision-container">
-
-
-                <div
-                        class="decision-status"
-                        id="decisionStatus"
-                >
-                    Monitoring
-                </div>
-
-
-
-                <div class="decision-item">
-
-                        <span>
-                            Recommendation
-                        </span>
-
-                    <strong id="recommendation">
-                        No action required
-                    </strong>
-
-                </div>
-
-
-
-                <div class="decision-item">
-
-                        <span>
-                            Anomaly Score
-                        </span>
-
-                    <strong id="confidence">
-                        0.00
-                    </strong>
-
-                </div>
-
-
-
-                <div class="decision-item">
-
-                        <span>
-                            Current Calls
-                        </span>
-
-                    <strong id="estimatedSavings">
-                        0
-                    </strong>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================
-         SERVICE / SYSTEM STATUS
-         ===================================== -->
-
-    <section class="card services-card">
-
-
-        <div class="card-header">
+        <!-- TOP BAR -->
+        <header class="topbar">
 
             <div>
+                <p class="eyebrow">COST INTELLIGENCE</p>
+                <h1>System Overview</h1>
+            </div>
 
-                <h2>
-                    System Information
-                </h2>
+            <div class="topbar-actions">
 
-                <p>
-                    Current Decision Engine status
-                </p>
+                <div class="live-indicator">
+                    <span></span>
+                    LIVE
+                </div>
+
+                <button id="refreshButton" class="refresh-button">
+                    ↻
+                    <span>Refresh</span>
+                </button>
 
             </div>
 
-        </div>
+        </header>
 
 
-        <div class="table-wrapper">
+        <!-- ================= ALERT ================= -->
 
-            <table>
+        <section id="anomalyAlert" class="anomaly-alert hidden">
 
-                <thead>
+            <div class="alert-symbol">
+                !
+            </div>
 
-                <tr>
+            <div class="alert-content">
+                <strong>Anomaly detected</strong>
+                <span>API usage is currently above the established baseline.</span>
+            </div>
 
-                    <th>
-                        Metric
-                    </th>
+            <div class="alert-score">
+                <small>ANOMALY SCORE</small>
+                <strong id="alertScore">--</strong>
+            </div>
 
-                    <th>
-                        Value
-                    </th>
-
-                    <th>
-                        Description
-                    </th>
-
-                    <th>
-                        Status
-                    </th>
-
-                </tr>
-
-                </thead>
+        </section>
 
 
-                <tbody id="servicesTable">
+        <!-- ================= SYSTEM PULSE ================= -->
 
-                <tr>
+        <section class="section-block">
 
-                    <td>
-                        Decision Engine
-                    </td>
+            <div class="section-heading">
+                <div>
+                    <p class="section-label">SYSTEM PULSE</p>
+                    <h2>Usage at a glance</h2>
+                </div>
 
-                    <td>
-                        <strong>
-                            Connected
-                        </strong>
-                    </td>
-
-                    <td>
-                        Waiting for backend data
-                    </td>
-
-                    <td>
-                        Monitoring
-                    </td>
-
-                </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </section>
+                <span id="lastUpdated" class="last-updated">
+                    Waiting for data...
+                </span>
+            </div>
 
 
+            <div class="metric-grid">
 
-    <!-- =====================================
-         FOOTER
-         ===================================== -->
+                <!-- Current Calls -->
+                <article class="metric-card primary-card">
 
-    <footer>
+                    <div class="metric-top">
+                        <span>Current API Calls</span>
+                        <span class="metric-symbol">↗</span>
+                    </div>
 
-        <p>
+                    <div class="metric-value">
+                        <span id="currentCalls">--</span>
+                    </div>
 
-            SaaS Cost Guardian
+                    <div class="metric-description">
+                        Requests detected by the system
+                    </div>
+
+                </article>
+
+
+                <!-- Baseline -->
+                <article class="metric-card">
+
+                    <div class="metric-top">
+                        <span>Baseline Calls</span>
+                        <span class="metric-symbol">≈</span>
+                    </div>
+
+                    <div class="metric-value">
+                        <span id="baselineCalls">--</span>
+                    </div>
+
+                    <div class="metric-description">
+                        Expected API usage
+                    </div>
+
+                </article>
+
+
+                <!-- Variance -->
+                <article class="metric-card">
+
+                    <div class="metric-top">
+                        <span>Usage Variance</span>
+                        <span class="metric-symbol">%</span>
+                    </div>
+
+                    <div class="metric-value">
+                        <span id="usageVariance">--</span>
+                    </div>
+
+                    <div class="metric-description">
+                        Difference from baseline
+                    </div>
+
+                </article>
+
+
+                <!-- Risk -->
+                <article class="metric-card risk-card">
+
+                    <div class="metric-top">
+                        <span>Risk Level</span>
+                        <span id="riskIndicator" class="risk-indicator"></span>
+                    </div>
+
+                    <div class="metric-value risk-value">
+                        <span id="riskLevel">--</span>
+                    </div>
+
+                    <div class="metric-description">
+                        Based on anomaly score
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ANALYTICS ================= -->
+
+        <section class="analytics-layout">
+
+            <!-- Usage Chart -->
+            <article class="panel chart-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <p class="section-label">USAGE SIGNAL</p>
+                        <h2>Current vs baseline</h2>
+                    </div>
+
+                    <div class="chart-legend">
+
+                        <span>
+                            <i class="legend-current"></i>
+                            Current
+                        </span>
+
+                        <span>
+                            <i class="legend-baseline"></i>
+                            Baseline
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="usageChart"></canvas>
+                </div>
+
+            </article>
+
+
+            <!-- AI Decision -->
+            <article class="panel decision-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <p class="section-label">AI DECISION</p>
+                        <h2>Decision Engine</h2>
+                    </div>
+
+                    <div id="decisionBadge" class="decision-badge">
+                        WAITING
+                    </div>
+
+                </div>
+
+
+                <div id="decisionStatus" class="decision-status">
+
+                    <div class="decision-icon">
+                        ?
+                    </div>
+
+                    <div>
+                        <strong>Waiting for analysis</strong>
+                        <span>Connecting to Decision Engine...</span>
+                    </div>
+
+                </div>
+
+
+                <div class="decision-data">
+
+                    <div class="decision-row">
+                        <span>Current Calls</span>
+                        <strong id="decisionCalls">--</strong>
+                    </div>
+
+                    <div class="decision-row">
+                        <span>Baseline</span>
+                        <strong id="decisionBaseline">--</strong>
+                    </div>
+
+                    <div class="decision-row">
+                        <span>Anomaly Score</span>
+                        <strong id="decisionScore">--</strong>
+                    </div>
+
+                    <div class="decision-row">
+                        <span>Variance</span>
+                        <strong id="decisionVariance">--</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="recommendation">
+
+                    <span class="recommendation-label">
+                        RECOMMENDATION
+                    </span>
+
+                    <p id="recommendationText">
+                        Waiting for Decision Engine analysis...
+                    </p>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ================= SYSTEM INFORMATION ================= -->
+
+        <section class="section-block">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="section-label">SYSTEM INFORMATION</p>
+                    <h2>Decision Engine status</h2>
+                </div>
+
+            </div>
+
+
+            <div class="system-table">
+
+                <div class="system-row">
+                    <span>Decision Engine</span>
+                    <strong id="engineStatus">Checking...</strong>
+                </div>
+
+                <div class="system-row">
+                    <span>Endpoint</span>
+                    <code>http://localhost:8080/decision</code>
+                </div>
+
+                <div class="system-row">
+                    <span>Refresh Interval</span>
+                    <strong>5 seconds</strong>
+                </div>
+
+                <div class="system-row">
+                    <span>Monitoring Mode</span>
+                    <strong>Real-time</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer class="footer">
 
             <span>
-                    •
-                </span>
+                SaaS Cost Guardian
+            </span>
 
-            Intelligent SaaS Usage Monitoring
+            <span>
+                Intelligent API usage monitoring
+            </span>
 
-        </p>
+        </footer>
 
-    </footer>
+    </main>
 
-
-</main>
-
-
-
-<!-- =========================================
-     CHART.JS
-     ========================================= -->
-
-<script
-        src="https://cdn.jsdelivr.net/npm/chart.js"
-></script>
+</div>
 
 
+<!-- Application Scripts -->
 
-<!-- =========================================
-     APPLICATION JAVASCRIPT
-     ========================================= -->
-
-<script
-        src="js/app.js"
-></script>
-
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
 
 </body>
-
 </html>
