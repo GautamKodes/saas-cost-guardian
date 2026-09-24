@@ -30,7 +30,7 @@ public class DecisionScheduler {
 
         StatsClient.StatsData stats = statsClient.getStats();
 
-        double score = scoreClient.getScore();
+        double score = scoreClient.getScore(stats.calls(), stats.uniqueCallers());
 
         decisionService.evaluate(
                 score,
@@ -39,7 +39,7 @@ public class DecisionScheduler {
         );
 
         // Trigger alert only once when anomaly is first detected
-        if (score > 0.7 && !alertSent) {
+        if (score > 0.45 && !alertSent) {
 
             slackNotifier.sendAlert(
                     stats.calls(),
@@ -49,7 +49,7 @@ public class DecisionScheduler {
 
             alertSent = true;
 
-        } else if (score <= 0.7) {
+        } else if (score <= 0.45) {
 
             // Reset alert state when system returns to normal
             alertSent = false;

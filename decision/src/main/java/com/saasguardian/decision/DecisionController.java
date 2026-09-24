@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5500")
+@CrossOrigin(origins = "*")
 public class DecisionController {
 
     private final StatsClient statsClient;
@@ -23,9 +23,9 @@ public class DecisionController {
     public DecisionResponse getDecision() {
 
         StatsClient.StatsData stats = statsClient.getStats();
-        double score = scoreClient.getScore();
+        double score = scoreClient.getScore(stats.calls(), stats.uniqueCallers());
 
-        boolean anomaly = score > 0.7;
+        boolean anomaly = score > 0.45;
 
         return new DecisionResponse(
                 score,
