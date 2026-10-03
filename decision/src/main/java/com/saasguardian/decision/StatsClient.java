@@ -6,7 +6,6 @@ import java.util.Map;
 
 @Component
 public class StatsClient {
-
     private final RestTemplate restTemplate = new RestTemplate();
     private static final String STATS_URL = "http://localhost:8081/stats";
 
