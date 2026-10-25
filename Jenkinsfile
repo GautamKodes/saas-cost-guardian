@@ -9,6 +9,7 @@ pipeline {
 
     environment {
         DOCKER = 'C:\\Users\\Arpit Lad\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe'
+        DOCKER_CONFIG = 'C:\\Users\\Arpit Lad\\.docker'
     }
 
     stages {
@@ -21,19 +22,19 @@ pipeline {
         stage('Check Docker') {
             steps {
                 bat '"%DOCKER%" --version'
-                bat '"%DOCKER%" compose version'
+                bat '"%DOCKER%" --config "%DOCKER_CONFIG%" compose version'
             }
         }
 
         stage('Validate Compose') {
             steps {
-                bat '"%DOCKER%" compose config -q'
+                bat '"%DOCKER%" --config "%DOCKER_CONFIG%" compose config -q'
             }
         }
 
         stage('Build Services') {
             steps {
-                bat '"%DOCKER%" compose build'
+                bat '"%DOCKER%" --config "%DOCKER_CONFIG%" compose build'
             }
         }
     }
