@@ -4,6 +4,11 @@ pipeline {
 
     options {
         timestamps()
+        skipDefaultCheckout(true)
+    }
+
+    environment {
+        DOCKER = 'C:\\Users\\Arpit Lad\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe'
     }
 
     stages {
@@ -15,20 +20,20 @@ pipeline {
 
         stage('Check Docker') {
             steps {
-                bat 'docker --version'
-                bat 'docker compose version'
+                bat '"%DOCKER%" --version'
+                bat '"%DOCKER%" compose version'
             }
         }
 
         stage('Validate Compose') {
             steps {
-                bat 'docker compose config -q'
+                bat '"%DOCKER%" compose config -q'
             }
         }
 
         stage('Build Services') {
             steps {
-                bat 'docker compose build'
+                bat '"%DOCKER%" compose build'
             }
         }
     }
@@ -42,4 +47,3 @@ pipeline {
         }
     }
 }
-
